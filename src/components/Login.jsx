@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { login } from '../services/services.js'
 
-const Login = ({ setUser }) => {
+const Login = ({ setUser, setUserName }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [check, setCheck] = useState(false)
@@ -18,8 +18,11 @@ const Login = ({ setUser }) => {
         }
         login(data).then(res => {
             const token = res.data.Token;
+            const userName = res.data.UserNameSurname
             if (token) {
                 check ? localStorage.setItem("Token", token) : sessionStorage.setItem("Token", token)
+                check ? localStorage.setItem("UserName", userName) : sessionStorage.setItem("UserName", userName)
+                setUserName(res.data.UserNameSurname)
                 setUser(true)
             }
             else {
@@ -68,7 +71,7 @@ export default Login
 const Wrapper = styled.section`
     width: 100vw;
     height: 100vh;
-    background-color: #E53A0D;
+    background-color: #e53a0d;
 `
 const Form = styled.form`
     position: absolute;
@@ -102,7 +105,7 @@ const Par = styled.p`
      font-size: 1.4rem;
      margin: 0.3rem;
      padding-bottom: ${({ padding }) => padding ? '2rem' : ''};
-     color: ${({ redirect }) => redirect ? ' #E53A0D' : ''};
+     color: ${({ redirect }) => redirect ? ' #e53a0d' : ''};
      cursor: ${({ redirect }) => redirect ? 'pointer' : ''};
 `
 const Input = styled.input`
@@ -124,7 +127,7 @@ const CheckBox = styled.div`
     }
     label{
         font-size: 1.2rem;
-        color: #E53A0D;
+        color:#e53a0d;
         font-weight: 500;
         padding-left: 0.6rem;
         vertical-align: middle;
@@ -144,7 +147,7 @@ const Button = styled.button`
     margin: 2rem;
     width: 13rem;
     height: 5rem;
-    background-color: ${({ spanColor }) => spanColor ? '#676b6d' : '#E53A0D'};
+    background-color: ${({ spanColor }) => spanColor ? '#a3abbb' : '#E53A0D'};
     color: #fff;
     border-radius: 0.7rem;
     border: none;
