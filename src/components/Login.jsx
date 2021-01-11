@@ -153,4 +153,5 @@ const Button = styled.button`
     border: none;
     font-size: 1.6rem;
     cursor: pointer;
+    font-family: 'Zaha Hadid Sans';
 `

@@ -7,14 +7,15 @@ import { postNewProduct } from '../services/services'
 
 const AddProduct = () => {
     const [name, setName] = useState('')
-    const [number, setNumber] = useState(0)
-    const [dayFrom, setDayFrom] = useState(0)
-    const [dayTo, setDayTo] = useState(0)
-    const [barcode, setBarcode] = useState(0)
+    const [number, setNumber] = useState('')
+    const [dayFrom, setDayFrom] = useState('')
+    const [dayTo, setDayTo] = useState('')
+    const [barcode, setBarcode] = useState('')
     const [manufacturer, setManufacturer] = useState('')
-    const [mainPackage, setMainPackage] = useState(0)
-    const [transportPackage, setTransportPackage] = useState(0)
-    const [unit, setUnit] = useState(0)
+    const [traidPackage, setTraidPackage] = useState('')
+    const [transportPackage, setTransportPackage] = useState('')
+    const [ratio, setRatio] = useState('')
+    const [weight, setWeight] = useState('')
     const [res, setRes] = useState('')
 
     const handleSubmit = (e) => {
@@ -32,29 +33,30 @@ const AddProduct = () => {
             "supplierCode": number,
             "barcode": barcode,
             "manufacturer": manufacturer,
-            "iDumTradePacking": mainPackage,
-            "iDumTransportPacking": transportPackage,
-            "ratioTranspTradePack": unit,
-            "weightTradePack": 0
-        }
+            "iDumTradePacking": parseInt(traidPackage), // trgovčko
+            "iDumTransportPacking": parseInt(transportPackage), // transpotno
+            "ratioTranspTradePack": parseInt(ratio), // Odnos  'string' 16
+            "weightTradePack": parseInt(weight) // prazno polje Težina
 
+        }
         postNewProduct(data).then(res => {
-            res.data.Success ? setRes('Artikl je uspešno dodat') : setRes('Došlo je do greške')
+            res.data.Success ? setRes('Artikal je uspešno dodat') : setRes('Došlo je do greške, artikal već postoji')
             setTimeout(() => {
                 setRes('')
             }, 2000)
         }).catch(err => {
             setRes(err)
         })
-        // setName('')
-        // setNumber(0)
-        // setDayTo(0)
-        // setDayFrom(0)
-        // setBarcode(0)
-        // setManufacturer('')
-        // setMainPackage(0)
-        // setTransportPackage(0)
-        // setUnit(0)
+        setName('')
+        setNumber('')
+        setDayTo('')
+        setDayFrom('')
+        setBarcode('')
+        setManufacturer('')
+        setTraidPackage('')
+        setTransportPackage('')
+        setRatio('')
+        setWeight('')
     }
 
     return (
@@ -63,32 +65,34 @@ const AddProduct = () => {
                 <InfoRight>Apoteka Lilly 142<Dots /></InfoRight>
                 <InfoLeft><OrangePlus />Spremi predlog za dopunu</InfoLeft>
                 <Form onSubmit={handleSubmit}>
-                    <H3>Dodavanje Artikla</H3>
+                    <H3>Dodavanje artikla</H3>
                     <Button type="submit">Dodaj</Button>
                     <Section>
                         <Left>
-                            <H4>Obavezne Informacije</H4>
+                            <H4>Obavezne informacije</H4>
                             <Label htmlFor="name">Naziv*</Label>
-                            <Input type="text" required id="name" onChange={(e) => setName(e.target.value)} />
+                            <Input type="text" required id="name" onChange={(e) => setName(e.target.value)} value={name} />
                             <Label htmlFor="number">Šifra*</Label>
-                            <Input type="number" required id="number" onChange={(e) => setNumber(e.target.value)} />
+                            <Input type="number" required id="number" onChange={(e) => setNumber(e.target.value)} value={number} />
+                            <Label htmlFor="barcode">Barkod*</Label>
+                            <Input type="text" required id="barcode" onChange={(e) => setBarcode(e.target.value)} value={barcode} />
                         </Left>
                         <Right>
-                            <H4>Dodatne Informacije</H4>
+                            <H4>Dodatne informacije</H4>
                             <Label htmlFor="day">Zalihe za dana(parametar)</Label><br />
-                            <Input days type="number" id="day" onChange={(e) => setDayFrom(e.target.value)} />
+                            <Input days type="number" id="day" onChange={(e) => setDayFrom(e.target.value)} value={dayFrom} />
                             <Label daysDash htmlFor="dash">-</Label>
-                            <Input days type="number" id="day" onChange={(e) => setDayTo(e.target.value)} /><br />
-                            <Label htmlFor="barcode">Barkod</Label>
-                            <Input type="number" id="barcode" onChange={(e) => setBarcode(e.target.value)} />
+                            <Input days type="number" id="day" onChange={(e) => setDayTo(e.target.value)} value={dayTo} /><br />
                             <Label htmlFor="manufacturer">Proizvođač</Label>
-                            <Input type="text" id="manufacturer" onChange={(e) => setManufacturer(e.target.value)} />
+                            <Input type="text" id="manufacturer" onChange={(e) => setManufacturer(e.target.value)} value={manufacturer} />
                             <Label htmlFor="package">Trgovačko Pakovanje</Label>
-                            <Input type="text" id="package" onChange={(e) => setMainPackage(e.target.value)} />
+                            <Input type="text" id="package" onChange={(e) => setTraidPackage(e.target.value)} value={traidPackage} />
                             <Label htmlFor="transportPackage">Transportno Pakovanje</Label>
-                            <Input type="text" id="transportPackage" onChange={(e) => setTransportPackage(e.target.value)} />
-                            <Label htmlFor="unit">Jedinica Mere</Label>
-                            <Input type="text" id="unit" onChange={(e) => setUnit(e.target.value)} />
+                            <Input type="text" id="transportPackage" onChange={(e) => setTransportPackage(e.target.value)} value={transportPackage} />
+                            <Label htmlFor="ratio">Odnos</Label>
+                            <Input type="text" id="ratio" onChange={(e) => setRatio(e.target.value)} value={ratio} />
+                            <Label htmlFor="weight">Težina</Label>
+                            <Input type="text" id="weight" onChange={(e) => setWeight(e.target.value)} value={weight} />
                         </Right>
                     </Section>
                 </Form>

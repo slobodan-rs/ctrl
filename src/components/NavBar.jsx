@@ -74,6 +74,7 @@ const Li = styled.li`
         color: white;
         background-color: black;
         font-size: 1.8rem;
+        font-family: 'Zaha Hadid Sans';
 
         :hover {
             cursor: pointer;
@@ -100,6 +101,11 @@ const Li = styled.li`
 const Logo = styled.img`
     height: 5.5rem;
     padding-left: 2rem;
+
+    @media(max-width: 768px){
+        height: 2.7em;
+        padding: 0.5em;
+    }
 `
 const AssideMenu = styled.div`
     width: 27rem;
