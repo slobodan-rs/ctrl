@@ -43,7 +43,7 @@ const AddProduct = () => {
             res.data.Success ? setRes('Artikal je uspešno dodat') : setRes('Došlo je do greške, artikal već postoji')
             setTimeout(() => {
                 setRes('')
-            }, 2000)
+            }, 2500)
         }).catch(err => {
             setRes(err)
         })
@@ -67,13 +67,14 @@ const AddProduct = () => {
                 <Form onSubmit={handleSubmit}>
                     <H3>Dodavanje artikla</H3>
                     <Button type="submit">Dodaj</Button>
+                    <Message>{res}</Message>
                     <Section>
                         <Left>
                             <H4>Obavezne informacije</H4>
                             <Label htmlFor="name">Naziv*</Label>
                             <Input type="text" required id="name" onChange={(e) => setName(e.target.value)} value={name} />
                             <Label htmlFor="number">Šifra*</Label>
-                            <Input type="number" required id="number" onChange={(e) => setNumber(e.target.value)} value={number} />
+                            <Input type="text" required id="number" onChange={(e) => setNumber(e.target.value)} value={number} />
                             <Label htmlFor="barcode">Barkod*</Label>
                             <Input type="text" required id="barcode" onChange={(e) => setBarcode(e.target.value)} value={barcode} />
                         </Left>
@@ -96,7 +97,7 @@ const AddProduct = () => {
                         </Right>
                     </Section>
                 </Form>
-                <Message>{res}</Message>
+
             </Info>
         </Wrapper>
     )
@@ -230,7 +231,7 @@ const Button = styled.button`
         margin: 0 auto;
         font-size: 1.2em;
         position: relative;
-        top: 870px;
+        top: 1000px;
     }
 `
 const Section = styled.section`
@@ -259,7 +260,7 @@ const Right = styled.div`
     @media(max-width: 768px){
         padding: 0;
         width: 100%;
-        height: 90%;
+        height: 80%;
     }
 
 `
@@ -301,11 +302,15 @@ const Label = styled.label`
     padding: ${({ daysDash }) => daysDash ? '0 1rem' : ''};
 `
 const Message = styled.h5`
-    text-align: center;
     font-weight: 200;
     color: #e53a0d;
+    height: 4rem;
+    font-weight: 200;
+    padding: 0 3rem;
+    margin: 0;
 
-    @media(max-width: 767px){
-       margin-top: 5em;
+    @media(max-width: 768px){
+        width: 100%;
+        text-align: center;
     }
 `

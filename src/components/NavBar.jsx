@@ -109,7 +109,7 @@ const Logo = styled.img`
 `
 const AssideMenu = styled.div`
     width: 27rem;
-    height: calc(100vh - 5.5rem);
+    height: calc(120vh - 5.5rem);
     background-color: #a3abbb80;
     padding: 0;
     margin: 0;

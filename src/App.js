@@ -48,7 +48,7 @@ const App = () => {
           </Route>
           <Main>
             <Route exact path="/" >
-              <Loader type="Rings" color="#e53a0d" height={100} width={100} timeout={1000} className="loader" />
+              {/* <Loader type="Rings" color="#e53a0d" height={100} width={100} timeout={1000} className="loader" /> */}
             </Route>
             <Route exact path="/pregled-artikla" >
               <AddProduct />
